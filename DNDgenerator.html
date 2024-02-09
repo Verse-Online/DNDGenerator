@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Character Generator</title>
+</head>
+<body>
+    <h2>D&D Character Generator</h2>
+    <form id="characterForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+        
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" min="1"><br><br>
+        
+        <label for="class">Class:</label>
+        <select id="class" name="class">
+            <option value="Fighter">Fighter</option>
+            <option value="Wizard">Wizard</option>
+            <option value="Rogue">Rogue</option>
+            <option value="Cleric">Cleric</option>
+            <!-- Add other classes as needed -->
+        </select><br><br>
+        
+        <label for="race">Race:</label>
+        <select id="race" name="race">
+            <option value="Human">Human</option>
+            <option value="Elf">Elf</option>
+            <option value="Dwarf">Dwarf</option>
+            <option value="Halfling">Halfling</option>
+            <!-- Add other races as needed -->
+        </select><br><br>
+        
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select><br><br>
+        
+        <button type="button" onclick="generateCharacter()">Generate Character</button>
+    </form>
+
+    <h3>Character Attributes</h3>
+    <div id="attributes">
+        <!-- Attributes will be displayed here -->
+    </div>
+
+    <script>
+        function generateCharacter() {
+            // Basic attribute generation logic
+            const attributes = {
+                strength: getRandomAttribute(),
+                dexterity: getRandomAttribute(),
+                intelligence: getRandomAttribute(),
+                wisdom: getRandomAttribute(),
+                constitution: getRandomAttribute(),
+                charisma: getRandomAttribute(),
+            };
+
+            // Display the attributes
+            const attributesDiv = document.getElementById('attributes');
+            attributesDiv.innerHTML = `<p>Strength: ${attributes.strength}</p>
+                                       <p>Dexterity: ${attributes.dexterity}</p>
+                                       <p>Intelligence: ${attributes.intelligence}</p>
+                                       <p>Wisdom: ${attributes.wisdom}</p>
+                                       <p>Constitution: ${attributes.constitution}</p>
+                                       <p>Charisma: ${attributes.charisma}</p>`;
+        }
+
+        function getRandomAttribute() {
+            // Simulates rolling 4d6 and subtracting the lowest die (common D&D attribute generation method)
+            let rolls = [diceRoll(6), diceRoll(6), diceRoll(6), diceRoll(6)];
+            rolls.sort().shift();
+            return rolls.reduce((a, b) => a + b, 0);
+        }
+
+        function diceRoll(sides) {
+            return Math.floor(Math.random() * sides) + 1;
+        }
+    </script>
+</body>
+</html>
